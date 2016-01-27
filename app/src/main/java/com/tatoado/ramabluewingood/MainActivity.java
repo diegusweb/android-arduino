@@ -182,10 +182,6 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void UiNewGameControl(){
-
-    }
-
     private void UiGameControl(){
         layout_joystick = (RelativeLayout)findViewById(R.id.layout_joystick);
 

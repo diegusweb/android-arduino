@@ -33,6 +33,7 @@ public class GameActivity extends Activity {
     // String for MAC address
     private static String address = null;
 
+
     private TextView angleTextView;
     private TextView powerTextView;
     private TextView directionTextView;
@@ -43,6 +44,9 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+        checkBTState();
 
         angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
@@ -81,7 +85,7 @@ public class GameActivity extends Activity {
 
                     case JoystickView.BOTTOM:
                         directionTextView.setText(R.string.bottom_lab);
-                        mConnectedThread.write("2"+Redondear(power));
+                        mConnectedThread.write("2");
                         Log.i("Diego", "1" + Redondear(power));
                         break;
 
