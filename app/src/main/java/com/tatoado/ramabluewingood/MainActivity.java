@@ -22,8 +22,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zerokol.views.JoystickView;
-
 public class MainActivity extends Activity {
 
     Button btnAcelerate, btnDesacelerate, btnAdelante, btnAtras, btnIzquierda, btnDerecha, btnStop;
@@ -45,12 +43,7 @@ public class MainActivity extends Activity {
 
     JoyStickClass js;
 
-
-    private TextView angleTextView;
-    private TextView powerTextView;
-    private TextView directionTextView;
-    // Importing as others views
-    private JoystickView joystick;
+    private SeekBar seekBar;
 
 
     @Override
@@ -58,94 +51,138 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnAcelerate = (Button) findViewById(R.id.buttonOn);
+        btnDesacelerate = (Button) findViewById(R.id.buttonOff);
 
-       // UiGameControl();
+        /*btnAdelante = (Button) findViewById(R.id.btnArriba);
+        btnAtras = (Button) findViewById(R.id.btnAtras);
+        btnIzquierda = (Button) findViewById(R.id.btnLeft);
+        btnDerecha = (Button) findViewById(R.id.btnRight);
+        btnStop = (Button) findViewById(R.id.btnStop);*/
 
-        angleTextView = (TextView) findViewById(R.id.angleTextView);
-        powerTextView = (TextView) findViewById(R.id.powerTextView);
-        directionTextView = (TextView) findViewById(R.id.directionTextView);
-        // referring as others views
-        joystick = (JoystickView) findViewById(R.id.joystickView);
-    }
+        btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+        checkBTState();
 
-    private void UiNewGameControl(){
-
-        angleTextView = (TextView) findViewById(R.id.angleTextView);
-        powerTextView = (TextView) findViewById(R.id.powerTextView);
-        directionTextView = (TextView) findViewById(R.id.directionTextView);
-        // referring as others views
-        joystick = (JoystickView) findViewById(R.id.joystickView);
-
-        joystick.setOnJoystickMoveListener(new JoystickView.OnJoystickMoveListener() {
-            @Override
-            public void onValueChanged(int angle, int power, int direction) {
-                angleTextView.setText(" " + String.valueOf(angle) + "°");
-                powerTextView.setText(" " + String.valueOf(power) + "% ---- "+Redondear(power));
-
-                // DecimalFormat decf = new DecimalFormat("#,##0");
-                //System.out.println(decf.format(cantTotal));
+        textView5 = (TextView)findViewById(R.id.textView5);
+        textView6 = (TextView)findViewById(R.id.textView6);
 
 
-
-                switch (direction) {
-                    case JoystickView.FRONT:
-                        directionTextView.setText(R.string.front_lab);
-                        //double res = (power/25);
-
-                        Log.i("Diego","1"+Redondear(power));
-                        break;
-
-                    case JoystickView.FRONT_RIGHT:
-                        directionTextView.setText(R.string.front_right_lab);
-                        break;
-
-                    case JoystickView.RIGHT:
-                        directionTextView.setText(R.string.right_lab);
-                        break;
-
-                    case JoystickView.RIGHT_BOTTOM:
-                        directionTextView.setText(R.string.right_bottom_lab);
-                        break;
-
-                    case JoystickView.BOTTOM:
-                        directionTextView.setText(R.string.bottom_lab);
-                        Log.i("Diego", "1" + Redondear(power));
-                        break;
-
-                    case JoystickView.BOTTOM_LEFT:
-                        directionTextView.setText(R.string.bottom_left_lab);
-                        break;
-
-                    case JoystickView.LEFT:
-                        directionTextView.setText(R.string.left_lab);
-                        break;
-
-                    case JoystickView.LEFT_FRONT:
-                        directionTextView.setText(R.string.left_front_lab);
-                        break;
-
-                    case JoystickView.FOCUS_UP:
-                        Log.i("Diego", "STOP CENTER");
-                        break;
-
-                    default:
-                        directionTextView.setText(R.string.center_lab);
-
-                }
+       // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
+        btnAcelerate.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("9");    // Send "0" via Bluetooth
+                Toast.makeText(getBaseContext(), "Acelerar", Toast.LENGTH_SHORT).show();
             }
-        }, JoystickView.DEFAULT_LOOP_INTERVAL);
+        });
+
+        btnDesacelerate.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("a");    // Send "1" via Bluetooth
+                Toast.makeText(getBaseContext(), "Desacelerar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*
+
+        btnAdelante.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Toast.makeText(getBaseContext(), "DOWN", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("1");
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Toast.makeText(getBaseContext(), "UP", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("0");
+                }
+                return false;
+            }
+        });
+
+        btnAtras.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Toast.makeText(getBaseContext(), "DOWN", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("2");
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Toast.makeText(getBaseContext(), "UP", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("0");
+                }
+                return false;
+            }
+        });
+
+        btnIzquierda.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Toast.makeText(getBaseContext(), "DOWN", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("3");
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Toast.makeText(getBaseContext(), "UP", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("0");
+                }
+                return false;
+            }
+        });
+
+        btnStop.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("0");    // Send "0" via Bluetooth
+                Toast.makeText(getBaseContext(), "Derecha", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //demostration
+        btnDerecha.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    Toast.makeText(getBaseContext(), "DOWN", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("4");
+                }
+                if(event.getAction() == MotionEvent.ACTION_UP){
+                    Toast.makeText(getBaseContext(), "UP", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("0");
+                }
+                return false;
+            }
+        });*/
+
+        UiGameControl();
+
+        seekBar = (SeekBar) findViewById(R.id.seekBar1);
+        textView = (TextView) findViewById(R.id.textView1);
+
+        textView.setText("Covered: " + seekBar.getProgress() + "/" + seekBar.getMax());
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                progress = i;
+                Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                textView.setText("Covered: " + progress + "/" + seekBar.getMax());
+                Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    public String Redondear(int numero)
-    {
-        numero = (numero*25)/100;
-        if(numero < 10)
-            return "0"+numero;
-        else
-            return Integer.toString(numero);
-    }
-
-    /*private void UiGameControl(){
+    private void UiGameControl(){
         layout_joystick = (RelativeLayout)findViewById(R.id.layout_joystick);
 
         js = new JoyStickClass(getApplicationContext()
@@ -228,7 +265,7 @@ public class MainActivity extends Activity {
         });
 
 
-    }*/
+    }
 
     public void resetParam(int pos) {
         if (pos == 1) {

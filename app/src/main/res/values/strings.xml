@@ -13,5 +13,6 @@
     <string name="left_front_lab">left_front_lab</string>
     <string name="center_lab">center_lab</string>
     <string name="right_lab">right_lab</string>
+    <string name="title_activity_game">GameActivity</string>
 
 </resources>
