@@ -3,4 +3,16 @@
     <string name="action_settings">Configuracion</string>
     <string name="hello_world">Hola Mundo</string>
     <string name="none_paired">Ningun dispositivo pudo ser emparejado</string>
+    <string name="title_activity_game">GameActivity</string>
+
+    <string name="front_lab">front_lab</string>
+    <string name="front_right_lab">front_right_lab</string>
+    <string name="right_bottom_lab">right_bottom_lab</string>
+    <string name="bottom_lab">bottom_lab</string>
+    <string name="bottom_left_lab">bottom_left_lab</string>
+    <string name="left_lab">left_lab</string>
+    <string name="left_front_lab">left_front_lab</string>
+    <string name="center_lab">center_lab</string>
+    <string name="right_lab">right_lab</string>
+
 </resources>

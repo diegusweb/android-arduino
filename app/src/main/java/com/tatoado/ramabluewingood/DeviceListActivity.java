@@ -87,7 +87,9 @@ public class DeviceListActivity extends Activity {
             String address = info.substring(info.length() - 17);
 
             // Make an intent to start next activity while taking an extra which is the MAC address.
-			Intent i = new Intent(DeviceListActivity.this, MainActivity.class);
+
+            //Intent i = new Intent(DeviceListActivity.this, MainActivity.class);
+            Intent i = new Intent(DeviceListActivity.this, GameActivity.class);
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
 			startActivity(i);   
         }
