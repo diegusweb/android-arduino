@@ -29,8 +29,8 @@ public class GameActivity extends Activity {
     // SPP UUID service - this should work for most devices
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    // String for MAC address
-    private static String address = null;
+    // String for MAC address  20:14:11:28:32:39
+    private static String address = "20:14:11:28:32:39";
 
 
     private TextView angleTextView;
@@ -69,40 +69,47 @@ public class GameActivity extends Activity {
                     case JoystickView.FRONT:
                         directionTextView.setText(R.string.front_lab);
                         //double res = (power/25);
-                        mConnectedThread.write("1"+Redondear(power)+"");
+                        //if(power % 2 == 0)
+                            mConnectedThread.write("1"+Redondear(power)+"");
+
                         Log.i("Diego", "1" + Redondear(power));
                         break;
 
                     case JoystickView.FRONT_RIGHT:
                         directionTextView.setText(R.string.front_right_lab);
+                        mConnectedThread.write("6" + Redondear(power) + "");
                         break;
 
                     case JoystickView.RIGHT:
                         directionTextView.setText(R.string.right_lab);
-                        mConnectedThread.write("3"+Redondear(power)+"");
+                            mConnectedThread.write("3"+Redondear(power)+"");
+
                         break;
 
                     case JoystickView.RIGHT_BOTTOM:
                         directionTextView.setText(R.string.right_bottom_lab);
+                        mConnectedThread.write("8" + Redondear(power) + "");
                         break;
 
                     case JoystickView.BOTTOM:
                         directionTextView.setText(R.string.bottom_lab);
-                        mConnectedThread.write("2"+Redondear(power)+"");
+                            mConnectedThread.write("2"+Redondear(power)+"");
                         Log.i("Diego", "1" + Redondear(power));
                         break;
 
                     case JoystickView.BOTTOM_LEFT:
+                        mConnectedThread.write("7" + Redondear(power)+"");
                         directionTextView.setText(R.string.bottom_left_lab);
                         break;
 
                     case JoystickView.LEFT:
                         directionTextView.setText(R.string.left_lab);
-                        mConnectedThread.write("4"+Redondear(power)+"");
+                        mConnectedThread.write("4" + Redondear(power)+"");
                         break;
 
                     case JoystickView.LEFT_FRONT:
                         directionTextView.setText(R.string.left_front_lab);
+                        mConnectedThread.write("6" + Redondear(power)+"");
                         break;
 
                     case JoystickView.CENTYER:
