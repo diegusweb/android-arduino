@@ -11,35 +11,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world"
-        android:id="@+id/direTextView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"
+        android:text="Angle"
         android:id="@+id/angleTextView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"
+        android:text="Power"
+        android:textSize="20dp"
         android:id="@+id/powerTextView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"
+        android:textSize="20dp"
+        android:text="Direction"
         android:id="@+id/directionTextView" />
 
 
     <com.tatoado.ramabluewingood.JoystickView
         android:id="@+id/joystickView"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
         android:layout_width="370dp"
-        android:layout_height="370dp" />
+        android:layout_height="370dp"
+        android:layout_marginLeft="-10dp" />
 
 </LinearLayout>
 

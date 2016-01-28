@@ -51,14 +51,14 @@ public class GameActivity extends Activity {
         angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
         directionTextView = (TextView) findViewById(R.id.directionTextView);
-        direTextView = (TextView) findViewById(R.id.direTextView);
+        //direTextView = (TextView) findViewById(R.id.direTextView);
         // referring as others views
         joystick = (JoystickView) findViewById(R.id.joystickView);
 
         joystick.setOnJoystickMoveListener(new JoystickView.OnJoystickMoveListener() {
             @Override
             public void onValueChanged(int angle, int power, int direction) {
-                direTextView.setText("direction " + String.valueOf(direction) + "°");
+                //direTextView.setText("direction " + String.valueOf(direction) + "°");
                 angleTextView.setText("Angle " + String.valueOf(angle) + "°");
                 powerTextView.setText("Power " + String.valueOf(power) + "% ---- "+Redondear(power));
 
