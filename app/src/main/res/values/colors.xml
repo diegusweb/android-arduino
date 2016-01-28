@@ -2,4 +2,5 @@
 <resources>
     <color name="linearSeparador">#696969</color>
     <color name="buttonColor">#4B8EF9</color>
+    <color name="fon">#ccc</color>
 </resources>

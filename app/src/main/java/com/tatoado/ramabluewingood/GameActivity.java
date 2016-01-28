@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zerokol.views.JoystickView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +36,7 @@ public class GameActivity extends Activity {
     private TextView angleTextView;
     private TextView powerTextView;
     private TextView directionTextView;
+    private TextView direTextView;
     // Importing as others views
     private JoystickView joystick;
 
@@ -51,14 +51,16 @@ public class GameActivity extends Activity {
         angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
         directionTextView = (TextView) findViewById(R.id.directionTextView);
+        direTextView = (TextView) findViewById(R.id.direTextView);
         // referring as others views
         joystick = (JoystickView) findViewById(R.id.joystickView);
 
         joystick.setOnJoystickMoveListener(new JoystickView.OnJoystickMoveListener() {
             @Override
             public void onValueChanged(int angle, int power, int direction) {
-                angleTextView.setText(" " + String.valueOf(angle) + "°");
-                powerTextView.setText(" " + String.valueOf(power) + "% ---- " + Redondear(power));
+                direTextView.setText("direction " + String.valueOf(direction) + "°");
+                angleTextView.setText("Angle " + String.valueOf(angle) + "°");
+                powerTextView.setText("Power " + String.valueOf(power) + "% ---- "+Redondear(power));
 
                 // DecimalFormat decf = new DecimalFormat("#,##0");
                 //System.out.println(decf.format(cantTotal));
@@ -67,7 +69,7 @@ public class GameActivity extends Activity {
                     case JoystickView.FRONT:
                         directionTextView.setText(R.string.front_lab);
                         //double res = (power/25);
-                        mConnectedThread.write("1"+Redondear(power));
+                        mConnectedThread.write("1"+Redondear(power)+"");
                         Log.i("Diego", "1" + Redondear(power));
                         break;
 
@@ -77,6 +79,7 @@ public class GameActivity extends Activity {
 
                     case JoystickView.RIGHT:
                         directionTextView.setText(R.string.right_lab);
+                        mConnectedThread.write("3"+Redondear(power)+"");
                         break;
 
                     case JoystickView.RIGHT_BOTTOM:
@@ -85,7 +88,7 @@ public class GameActivity extends Activity {
 
                     case JoystickView.BOTTOM:
                         directionTextView.setText(R.string.bottom_lab);
-                        mConnectedThread.write("2");
+                        mConnectedThread.write("2"+Redondear(power)+"");
                         Log.i("Diego", "1" + Redondear(power));
                         break;
 
@@ -95,14 +98,20 @@ public class GameActivity extends Activity {
 
                     case JoystickView.LEFT:
                         directionTextView.setText(R.string.left_lab);
+                        mConnectedThread.write("4"+Redondear(power)+"");
                         break;
 
                     case JoystickView.LEFT_FRONT:
                         directionTextView.setText(R.string.left_front_lab);
                         break;
 
-                    case JoystickView.FOCUS_UP:
-                        Log.i("Diego", "STOP CENTER");
+                    case JoystickView.CENTYER:
+
+                        if(power == 0){
+                            directionTextView.setText("CENTER - STOP");
+                            mConnectedThread.write("000");
+                        }
+
                         break;
 
                     default:
@@ -115,7 +124,7 @@ public class GameActivity extends Activity {
 
     public String Redondear(int numero)
     {
-        numero = (numero*25)/100;
+        numero = (numero*99)/100;
         if(numero < 10)
             return "0"+numero;
         else
