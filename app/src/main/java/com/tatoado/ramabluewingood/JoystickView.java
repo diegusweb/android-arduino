@@ -95,7 +95,7 @@ public class JoystickView extends View implements Runnable {
         yPosition = (int) getWidth() / 2;
 
         buttonRadius = (int) (d / 2 * 0.15);
-        joystickRadius = (int) (d / 2 * 0.75);
+        joystickRadius = (int) (d / 2 * 0.88);
     }
 
     private int measure(int measureSpec) {

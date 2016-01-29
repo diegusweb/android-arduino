@@ -109,7 +109,7 @@ public class GameActivity extends Activity {
 
                     case JoystickView.LEFT_FRONT:
                         directionTextView.setText(R.string.left_front_lab);
-                        mConnectedThread.write("6" + Redondear(power)+"");
+                        mConnectedThread.write("5" + Redondear(power)+"");
                         break;
 
                     case JoystickView.CENTYER:
