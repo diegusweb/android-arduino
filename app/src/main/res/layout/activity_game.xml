@@ -9,11 +9,11 @@
     tools:context=".MainActivity" >
 
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Angle"
-        android:id="@+id/angleTextView" />
+        android:id="@+id/angleTextView" />-->
 
     <TextView
         android:layout_width="wrap_content"

@@ -59,8 +59,8 @@ public class GameActivity extends Activity {
             @Override
             public void onValueChanged(int angle, int power, int direction) {
                 //direTextView.setText("direction " + String.valueOf(direction) + "°");
-                angleTextView.setText("Angle " + String.valueOf(angle) + "°");
-                powerTextView.setText("Power " + String.valueOf(power) + "% ---- "+Redondear(power));
+               // angleTextView.setText("Angle " + String.valueOf(angle) + "°");
+                powerTextView.setText("Power " + Redondear(power) + "% ---- ");
 
                 // DecimalFormat decf = new DecimalFormat("#,##0");
                 //System.out.println(decf.format(cantTotal));
