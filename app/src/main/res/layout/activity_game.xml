@@ -16,28 +16,48 @@
         android:text="Angle"
         android:id="@+id/angleTextView" />-->
 
-    <io.vov.vitamio.widget.VideoView
-        android:id="@+id/vitamio_videoView"
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/Tabla"
         android:layout_width="match_parent"
-        android:layout_height="99dp"
-        android:layout_weight="0.18" />
+        android:layout_height="114dp"
+        android:stretchColumns="1"
+        android:layout_weight="0.50">
+
+    <TableRow
+        android:id="@+id/Cabecera"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Power"
-        android:textSize="20dp"
-        android:id="@+id/powerTextView" />
+        <io.vov.vitamio.widget.VideoView
+            android:id="@+id/vitamio_videoView"
+            android:layout_width="181dp"
+            android:layout_height="99dp"
+            android:layout_gravity="right" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Power"
+            android:textSize="20dp"
+            android:id="@+id/powerTextView" />
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Direction"
-        android:id="@+id/directionTextView" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Direction"
+            android:id="@+id/directionTextView" />
+
+
+    </TableRow>
+    </TableLayout>
+
+
 
 
     <com.tatoado.ramabluewingood.JoystickView
