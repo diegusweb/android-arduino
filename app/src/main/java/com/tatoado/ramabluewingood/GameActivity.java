@@ -19,6 +19,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import io.vov.vitamio.LibsChecker;
+import io.vov.vitamio.widget.VideoView;
+
 public class GameActivity extends Activity {
 
     private BluetoothAdapter btAdapter = null;
@@ -45,10 +48,24 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+
+        //imagen video
+        if (!LibsChecker.checkVitamioLibs(this))  //Important!
+            return;
+
+        setContentView(R.layout.activity_main);
+        VideoView mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
+        String path = "rtsp://192.168.100.124:1935/live/myStream";
+        mVideoView.setVideoPath(path);
+        mVideoView.requestFocus();
+        //-----------
+
+
+
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
-        angleTextView = (TextView) findViewById(R.id.angleTextView);
+        //angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
         directionTextView = (TextView) findViewById(R.id.directionTextView);
         //direTextView = (TextView) findViewById(R.id.direTextView);
