@@ -7,9 +7,11 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import io.vov.vitamio.LibsChecker;
+import io.vov.vitamio.MediaPlayer;
+import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 public class GameActivity extends Activity {
@@ -43,23 +47,14 @@ public class GameActivity extends Activity {
     // Importing as others views
     private JoystickView joystick;
 
+    //Streaming video
+    private String pathToFileOrUrl= "rtmp://192.168.100.124:1935/live/myStream";
+    private VideoView mVideoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-
-        //imagen video
-        if (!LibsChecker.checkVitamioLibs(this))  //Important!
-            return;
-
-        setContentView(R.layout.activity_main);
-        VideoView mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
-        String path = "rtmp://192.168.100.124:1935/live/myStream";
-        mVideoView.setVideoPath(path);
-        mVideoView.requestFocus();
-        //-----------
-
 
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
@@ -144,6 +139,50 @@ public class GameActivity extends Activity {
                 }
             }
         }, JoystickView.DEFAULT_LOOP_INTERVAL);
+
+
+        //imagen video
+        if (!LibsChecker.checkVitamioLibs(this))  //Important!
+            return;
+
+        setContentView(R.layout.activity_main);
+        mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
+
+
+        if (pathToFileOrUrl == "") {
+            Toast.makeText(this, "Please set the video path for your media file", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+
+            /*
+             * Alternatively,for streaming media you can use
+             * mVideoView.setVideoURI(Uri.parse(URLstring));
+             */
+            mVideoView.setVideoPath(pathToFileOrUrl);
+            mVideoView.setMediaController(new MediaController(this));
+            mVideoView.requestFocus();
+
+            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    // optional need Vitamio 4.0
+                    mediaPlayer.setPlaybackSpeed(1.0f);
+                }
+            });
+        }
+
+
+        //-----------
+    }
+
+    public void startPlay(View view) {
+        if (!TextUtils.isEmpty(pathToFileOrUrl)) {
+            mVideoView.setVideoPath(pathToFileOrUrl);
+        }
+    }
+
+    public void openVideo(View View) {
+        mVideoView.setVideoPath(pathToFileOrUrl);
     }
 
     public String Redondear(int numero)

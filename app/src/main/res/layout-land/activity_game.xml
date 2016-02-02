@@ -15,12 +15,33 @@
         android:layout_height="wrap_content"
         android:text="Angle"
         android:id="@+id/angleTextView" />-->
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startPlay"
+        android:text="play_video"/>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="openVideo"
+        android:text="open_video"
+        android:layout_above="@+id/vitamio_videoView"
+        android:layout_toRightOf="@+id/start"
+        android:layout_toEndOf="@+id/start" />
 
     <io.vov.vitamio.widget.VideoView
         android:id="@+id/vitamio_videoView"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:layout_above="@+id/powerTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/start" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,8 +62,8 @@
         android:text="Direction"
         android:id="@+id/directionTextView"
         android:layout_below="@+id/vitamio_videoView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/start"
+        android:layout_toEndOf="@+id/start" />
 
 
     <com.tatoado.ramabluewingood.JoystickView
