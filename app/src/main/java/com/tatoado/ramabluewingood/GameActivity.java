@@ -55,7 +55,7 @@ public class GameActivity extends Activity {
 
         setContentView(R.layout.activity_main);
         VideoView mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
-        String path = "rtsp://192.168.100.124:1935/live/myStream";
+        String path = "rtmp://192.168.100.124:1935/live/myStream";
         mVideoView.setVideoPath(path);
         mVideoView.requestFocus();
         //-----------

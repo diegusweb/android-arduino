@@ -33,7 +33,7 @@
         <io.vov.vitamio.widget.VideoView
             android:id="@+id/vitamio_videoView"
             android:layout_width="181dp"
-            android:layout_height="99dp"
+            android:layout_height="150dp"
             android:layout_gravity="right" />
 
 

@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fon"
+
+    tools:context=".MainActivity"
+    android:weightSum="1">
+
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Angle"
+        android:id="@+id/angleTextView" />-->
+
+    <io.vov.vitamio.widget.VideoView
+        android:id="@+id/vitamio_videoView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="right" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Power"
+        android:textSize="20dp"
+        android:id="@+id/powerTextView"
+        android:layout_alignBottom="@+id/joystickView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Direction"
+        android:id="@+id/directionTextView"
+        android:layout_below="@+id/vitamio_videoView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <com.tatoado.ramabluewingood.JoystickView
+        android:id="@+id/joystickView"
+        android:layout_width="290dp"
+        android:layout_height="290dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>
+
+
