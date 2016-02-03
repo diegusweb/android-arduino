@@ -37,6 +37,13 @@
         android:layout_height="350dp"
         android:layout_marginLeft="8dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Version 3"
+        android:id="@+id/dir"/>
+
 </LinearLayout>
 
 

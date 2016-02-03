@@ -48,7 +48,7 @@ public class GameActivity extends Activity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
-        angleTextView = (TextView) findViewById(R.id.angleTextView);
+        //angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
         directionTextView = (TextView) findViewById(R.id.directionTextView);
         //direTextView = (TextView) findViewById(R.id.direTextView);
