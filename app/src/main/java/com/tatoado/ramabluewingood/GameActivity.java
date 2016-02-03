@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,6 +58,8 @@ public class GameActivity extends Activity {
         joystick = (JoystickView) findViewById(R.id.joystickView);
 
         joystick.setOnJoystickMoveListener(new JoystickView.OnJoystickMoveListener() {
+            public Context context;
+
             @Override
             public void onValueChanged(int angle, int power, int direction) {
                 //direTextView.setText("direction " + String.valueOf(direction) + "°");
@@ -117,6 +121,9 @@ public class GameActivity extends Activity {
                         if(power == 0){
                             directionTextView.setText("CENTER - STOP");
                             mConnectedThread.write("000");
+                            Vibrator v = (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
+                            // Vibrate for 500 milliseconds
+                            v.vibrate(500);
                         }
 
                         break;
