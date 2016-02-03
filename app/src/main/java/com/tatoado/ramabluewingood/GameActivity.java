@@ -42,10 +42,14 @@ public class GameActivity extends Activity {
     // Importing as others views
     private JoystickView joystick;
 
+    private Vibrator v;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
@@ -58,13 +62,12 @@ public class GameActivity extends Activity {
         joystick = (JoystickView) findViewById(R.id.joystickView);
 
         joystick.setOnJoystickMoveListener(new JoystickView.OnJoystickMoveListener() {
-            public Context context;
 
             @Override
             public void onValueChanged(int angle, int power, int direction) {
                 //direTextView.setText("direction " + String.valueOf(direction) + "°");
                // angleTextView.setText("Angle " + String.valueOf(angle) + "°");
-                powerTextView.setText("Power " + Redondear(power) + "% ---- ");
+                powerTextView.setText("Power " + Redondear(power));
 
                 // DecimalFormat decf = new DecimalFormat("#,##0");
                 //System.out.println(decf.format(cantTotal));
@@ -121,7 +124,7 @@ public class GameActivity extends Activity {
                         if(power == 0){
                             directionTextView.setText("CENTER - STOP");
                             mConnectedThread.write("000");
-                            Vibrator v = (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
+
                             // Vibrate for 500 milliseconds
                             v.vibrate(500);
                         }
